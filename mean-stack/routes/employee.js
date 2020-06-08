@@ -20,10 +20,20 @@ router.post("/saveEmployeeData", async (req, res) => {
 
 router.get("/getEmployeeData", async (req, res) => {
   try {
-    const employee = await Employee.find();
-    res.json(employee);
+    const getEmployee = await Employee.find();
+    res.json(getEmployee);
   } catch (error) {
     res.json({ message: error });
   }
 });
+
+
+router.put('/editEmployeeData', async (req, res) => {
+  try {
+    const putEmployee = await Employee.findById();
+    res.json(putEmployee);
+  } catch (error) {
+    res.json({ message: error });
+  }
+})
 module.exports = router;
