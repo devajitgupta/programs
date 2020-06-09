@@ -27,13 +27,23 @@ router.get("/getEmployeeData", async (req, res) => {
   }
 });
 
-
-router.put('/editEmployeeData', async (req, res) => {
+router.put("/editEmployeeData", async (req, res) => {
   try {
-    const putEmployee = await Employee.findById();
-    res.json(putEmployee);
+    const employee = {
+      name: req.body.name,
+      position: req.body.position,
+      office: req.body.office,
+      salary: req.body.salary,
+    };
+
+    const updatedEmployee = await Employee.findAndModify(
+      { _id: req.params.employeeId },
+      employee
+    );
+    res.json(updatedEmployee);
   } catch (error) {
     res.json({ message: error });
   }
-})
+});
+
 module.exports = router;

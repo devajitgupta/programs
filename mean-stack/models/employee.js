@@ -9,6 +9,7 @@ const employeeSchema = new mongoose.Schema({
   },
   office: {
     type: String,
+
   },
   salary: {
     type: Number,
@@ -16,4 +17,10 @@ const employeeSchema = new mongoose.Schema({
   timestamp: {},
 });
 
-module.exports = mongoose.model("Employee", employeeSchema);
+module.expo
+
+
+
+
+
+rts = mongoose.model("Employee", employeeSchema);
