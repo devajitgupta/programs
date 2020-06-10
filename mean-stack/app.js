@@ -7,8 +7,19 @@ app.use(bodyParser.json());
 
 const employeeRoutes = require("./routes/employee");
 const employeeSchema = require("./models/employee");
-
+app.use(bodyparser.urlencoded({
+  extended: true
+}));
 app.use("/", employeeRoutes);
+app.use(express.json());
+  // Note: __dirname is directory current directory you're in. Try logging it and see what you get!
+
+app.set('views', path.join(__dirname, '/views/'));
+app.engine('hbs', exphb({ extname: 'hbs', defaultLayout: 'mainLayout', layoutDir: __dirname + 'views/layouts/' }));
+app.set('view engine', 'hbs');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.listen(port, () => {
   console.log("server running ");
 });

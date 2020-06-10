@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const Employee = require("../models/employee");
-
+const path = require("path");
 router.post("/saveEmployeeData", async (req, res) => {
-  console.log(req);
   const employee = new Employee({
     name: req.body.name,
     position: req.body.position,
@@ -18,7 +17,7 @@ router.post("/saveEmployeeData", async (req, res) => {
   }
 });
 
-router.get("/getEmployeeData", async (req, res) => {
+router.get("/getEmployee", async (req, res) => {
   try {
     const getEmployee = await Employee.find();
     res.json(getEmployee);
@@ -35,12 +34,21 @@ router.put("/editEmployeeData", async (req, res) => {
       office: req.body.office,
       salary: req.body.salary,
     };
-
     const updatedEmployee = await Employee.findAndModify(
       { _id: req.params.employeeId },
       employee
     );
     res.json(updatedEmployee);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+/// get single employee
+router.get("/getEmployeeId", async (req, res) => {
+  console.log("get single data", req.body);
+  try {
+    const getEmployee = await Employee.findByID(req.params.getEmployeeId);
+    res.json(getEmployee);
   } catch (error) {
     res.json({ message: error });
   }
